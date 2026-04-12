@@ -23,6 +23,8 @@ if __name__ == "__main__":
     epochs = 50
 
     optimizer = torch.optim.Adam(drift.parameters(), lr=0.001)
+
+    best_val_loss = float('inf')
     
     # training loop
     for epoch in range(epochs):
@@ -59,6 +61,13 @@ if __name__ == "__main__":
 
         avg_val_loss = val_loss / num_batches
         print('Epoch ' + str(epoch) + ' Val Loss: ' + str(avg_val_loss))
+
+        if avg_val_loss < best_val_loss:
+            best_val_loss = avg_val_loss
+            torch.save(drift.state_dict(), 'checkpoints/best_model.pth')
+            print('Saved best model at epoch ' + str(epoch))
+    
+    torch.save(drift.state_dict(), 'checkpoints/drift_model.pth')
 
         
 
