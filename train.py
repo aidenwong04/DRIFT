@@ -1,6 +1,7 @@
 from model import DRIFT
 from losses import SupConLoss
 from dataset import WILDDataset
+from datetime import datetime
 
 from pathlib import Path
 
@@ -31,6 +32,8 @@ if __name__ == "__main__":
     optimizer = torch.optim.Adam(drift.parameters(), lr=0.001)
 
     best_val_loss = float('inf')
+
+    run_name = datetime.now().strftime('%Y%m%d_%H%M%S')
     
     # training loop
     for epoch in range(epochs):
@@ -70,10 +73,10 @@ if __name__ == "__main__":
 
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(drift.state_dict(), 'checkpoints/best_model.pth')
+            torch.save(drift.state_dict(), f'checkpoints/best_model_{run_name}.pth')
             print('Saved best model at epoch ' + str(epoch))
     
-    torch.save(drift.state_dict(), 'checkpoints/drift_model.pth')
+    torch.save(drift.state_dict(), f'checkpoints/drift_model_{run_name}.pth')
 
         
 
