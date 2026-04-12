@@ -4,7 +4,6 @@ from pathlib import Path
 from PIL import Image
 from torchvision import transforms
 from torchvision.io import decode_image
-import os
 
 import transformations
 

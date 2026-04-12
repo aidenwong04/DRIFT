@@ -17,7 +17,7 @@ class DRIFT(nn.Module):
         # in supcon, they use a small MLP to map the backbone embeddings to the contrastive space
         # they used 128 as the size of their contrastive embeddings, so we use 128 as well for now.
 
-        self.projection_head = nn.sequential(
+        self.projection_head = nn.Sequential(
             nn.Linear(feat_dim, feat_dim),
             nn.ReLU(),
             nn.Linear(feat_dim, embed_dim)
