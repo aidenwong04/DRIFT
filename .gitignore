@@ -2,3 +2,5 @@ drift_env/
 scripts/
 __pycache__/
 logs/
+checkpoints/
+*.pth
