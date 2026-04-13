@@ -73,10 +73,10 @@ if __name__ == "__main__":
 
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(drift.state_dict(), f'checkpoints/best_model_{run_name}.pth')
+            torch.save(drift.state_dict(), f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
             print('Saved best model at epoch ' + str(epoch))
     
-    torch.save(drift.state_dict(), f'checkpoints/drift_model_{run_name}.pth')
+    torch.save(drift.state_dict(), f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/drift_model_{run_name}.pth')
 
         
 
