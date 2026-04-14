@@ -9,7 +9,15 @@ import torch
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split
 
+import argparse
+import wandb
+
 if __name__ == "__main__":
+    # check if u want to resume from a previous training run
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--resume', type=str, default=None, help='path to checkpoint to resume from')
+    args = parser.parse_args()
+
     # instanstiate the dataset, model, and loss.
     root = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
     wild_dataset = WILDDataset(root)
@@ -31,12 +39,29 @@ if __name__ == "__main__":
 
     optimizer = torch.optim.Adam(drift.parameters(), lr=0.001)
 
+    wandb.init(project='DRIFT', config={
+        'epochs': epochs,
+        'batch_size': 128,
+        'lr': 0.001,
+        'temperature': 0.1,
+    })
+
+    start_epoch = 0
     best_val_loss = float('inf')
+
+    if args.resume:
+        checkpoint = torch.load(args.resume)
+        drift.load_state_dict(checkpoint['model_state'])
+        optimizer.load_state_dict(checkpoint['optimizer_state'])
+        best_val_loss = checkpoint['best_val_loss']
+        start_epoch = checkpoint['epoch'] + 1
+        print('Resumed from checkpoint: ' + args.resume)
+        print(f'Resumed from epoch {start_epoch}')
 
     run_name = datetime.now().strftime('%Y%m%d_%H%M%S')
     
     # training loop
-    for epoch in range(epochs):
+    for epoch in range(start_epoch, epochs):
         # trainng model
         drift.train()
         print('Epoch: ' + str(epoch))
@@ -47,7 +72,7 @@ if __name__ == "__main__":
             features, projections = drift.forward(concatenated_views)
             loss = supconloss.forward(projections, labels)
 
-            print('Batch_idx: ' + str(batch_idx) + ', Loss: ' + str(loss.item()))
+            wandb.log({'train_loss': loss.item(), 'epoch': epoch, 'batch': batch_idx})
 
             optimizer.zero_grad()
             loss.backward()
@@ -69,14 +94,25 @@ if __name__ == "__main__":
                 num_batches += 1
 
         avg_val_loss = val_loss / num_batches
-        print('Epoch ' + str(epoch) + ' Val Loss: ' + str(avg_val_loss))
+        wandb.log({'val_loss': avg_val_loss, 'epoch': epoch})
 
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save(drift.state_dict(), f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
-            print('Saved best model at epoch ' + str(epoch))
+            torch.save({
+                'epoch': epoch,
+                'model_state': drift.state_dict(),
+                'optimizer_state': optimizer.state_dict(),
+                'best_val_loss': best_val_loss,
+            }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
+            
+            print('Saved best model at epoch ' + f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
     
-    torch.save(drift.state_dict(), f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/drift_model_{run_name}.pth')
+    torch.save({
+        'epoch': epoch,
+        'model_state': drift.state_dict(),
+        'optimizer_state': optimizer.state_dict(),
+        'best_val_loss': best_val_loss,
+    }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/drift_model_{run_name}.pth')
 
         
 
