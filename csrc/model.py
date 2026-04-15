@@ -32,6 +32,22 @@ class DRIFT(nn.Module):
         return features, projections
 
 
+class LinearProbe(nn.Module):
+    def __init__(self, backbone, num_classes):
+        # takes the backbone, freezes the weights, and attatches a linear classifier on top of it
+        super().__init__()
+        self.backbone = backbone
+        for param in self.backbone.parameters():
+            param.requires_grad = False # this freezes the backbone
+
+        self.classifier = nn.Linear(2048, num_classes) #resnet outputs 2048 dim, so this is hardcoded for resnet
+
+    def forward(self,x):
+        with torch.no_grad():
+            features = self.backbone(x)
+        logits = self.classifier(features)
+        return logits
+        
 
 
 
