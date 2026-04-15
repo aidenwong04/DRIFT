@@ -4,3 +4,5 @@ __pycache__/
 logs/
 checkpoints/
 *.pth
+/wandb
+tea_debug.log
