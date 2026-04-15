@@ -16,6 +16,9 @@ import wandb
 
 if __name__ == "__main__":
 
+    print(f"CUDA available: {torch.cuda.is_available()}")
+    print(f"Device: {device}")
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default=None, help='checkpoint of the model you want to probe')
     args = parser.parse_args()
@@ -28,7 +31,7 @@ if __name__ == "__main__":
         model = torch.load(args.model)
         drift.load_state_dict(model['model_state'])
 
-        linear_probe = LinearProbe(drift.backbone, 10) # init the linear probe model
+        linear_probe = LinearProbe(drift.backbone, 10).to(device)  # init the linear probe model
 
         root = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
         wild_dataset = WILDDataset(root)
@@ -44,7 +47,7 @@ if __name__ == "__main__":
         optimizer = torch.optim.Adam(linear_probe.classifier.parameters(), lr=1e-3)
         criterion = nn.CrossEntropyLoss()
 
-        wandb.init(project='DRIFT', name='linear_probe_run', config={
+        wandb.init(project='DRIFT', name='linear_probe_run_clean_imgs', config={
             'epochs': epochs,
             'batch_size': 128,
             'lr': 0.001,
@@ -92,5 +95,6 @@ if __name__ == "__main__":
             accuracy = correct / total
             wandb.log({'val_loss': avg_val_loss, 'val_accuracy': accuracy, 'epoch': epoch})
             print(f'Epoch {epoch} Val Loss: {avg_val_loss:.4f}, Val Accuracy: {accuracy:.4f}')
-        else:
-            print("Model checkpoint missing.")
+    
+    else:
+        print("Model checkpoint missing.")
