@@ -16,9 +16,6 @@ import wandb
 
 if __name__ == "__main__":
 
-    print(f"CUDA available: {torch.cuda.is_available()}")
-    print(f"Device: {device}")
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default=None, help='checkpoint of the model you want to probe')
     args = parser.parse_args()
@@ -26,6 +23,9 @@ if __name__ == "__main__":
     if args.model:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         drift = DRIFT().to(device)
+
+        print(f"CUDA available: {torch.cuda.is_available()}")
+        print(f"Device: {device}")
 
         # load the model
         model = torch.load(args.model)
