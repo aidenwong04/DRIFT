@@ -99,24 +99,20 @@ if __name__ == "__main__":
         avg_val_loss = val_loss / num_batches
         wandb.log({'val_loss': avg_val_loss, 'epoch': epoch})
 
+        checkpoint = {
+            'epoch': epoch,
+            'model_state': drift.state_dict(),
+            'optimizer_state': optimizer.state_dict(),
+            'best_val_loss': best_val_loss,
+        }
+
+        torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/latest_{run_name}.pth')
+
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
-            torch.save({
-                'epoch': epoch,
-                'model_state': drift.state_dict(),
-                'optimizer_state': optimizer.state_dict(),
-                'best_val_loss': best_val_loss,
-            }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
-            
-            print('Saved best model at epoch ' + f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
-    
-    torch.save({
-        'epoch': epoch,
-        'model_state': drift.state_dict(),
-        'optimizer_state': optimizer.state_dict(),
-        'best_val_loss': best_val_loss,
-    }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/drift_model_{run_name}.pth')
-
+            checkpoint['best_val_loss'] = best_val_loss
+            torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
+            print(f'Saved best model at epoch {epoch}')
         
 
 
