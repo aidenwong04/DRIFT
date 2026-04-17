@@ -34,14 +34,17 @@ if __name__ == "__main__":
         linear_probe = LinearProbe(drift.backbone, 10).to(device)  # init the linear probe model
 
         root = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
-        wild_dataset = WILDDataset(root)
-        train_size = int(0.8 * len(wild_dataset))
-        val_size = len(wild_dataset) - train_size
-        train_dataset, val_dataset = random_split(wild_dataset, [train_size, val_size])
+        full_dataset = WILDDataset(root)
+
+        train_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT/splits/train_idx.pt')
+        val_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT/splits/val_idx.pt')
+
+        train_dataset = Subset(full_dataset, train_idx)
+        val_dataset = Subset(full_dataset, val_idx)
 
         train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True)
         val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, pin_memory=True)
-
+        
         epochs = 10
 
         optimizer = torch.optim.Adam(linear_probe.classifier.parameters(), lr=1e-3)

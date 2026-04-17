@@ -19,9 +19,9 @@ class WILDDataset(Dataset):
         self.samples = []
         self.transform = transformations.DegradationPipeline()
 
-        for sub_dir in root.iterdir():
+        for sub_dir in sorted(root.iterdir()):
             if sub_dir.is_dir(): # these are all the model names
-                for img in sub_dir.iterdir(): # iterate through all images in subdir
+                for img in sorted(sub_dir.iterdir()): # iterate through all images in subdir
                     # add all images to the samples as a tuple (path to image, model_name)
                     # img is a path
                     if img.suffix == '.png':
