@@ -8,8 +8,7 @@ from pathlib import Path
 
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
-from torch.utils.data import random_split
+from torch.utils.data import DataLoader, Subset
 
 import argparse
 import wandb
@@ -28,7 +27,7 @@ if __name__ == "__main__":
         print(f"Device: {device}")
 
         # load the model
-        model = torch.load(args.model)
+        model = torch.load(args.model, map_location=device)
         drift.load_state_dict(model['model_state'])
 
         linear_probe = LinearProbe(drift.backbone, 10).to(device)  # init the linear probe model
@@ -44,7 +43,7 @@ if __name__ == "__main__":
 
         train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True)
         val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, pin_memory=True)
-        
+
         epochs = 10
 
         optimizer = torch.optim.Adam(linear_probe.classifier.parameters(), lr=1e-3)
@@ -54,6 +53,7 @@ if __name__ == "__main__":
             'epochs': epochs,
             'batch_size': 128,
             'lr': 0.001,
+            'seed': 42,
         })
 
         best_val_loss = float('inf')

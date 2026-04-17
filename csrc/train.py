@@ -28,32 +28,36 @@ if __name__ == "__main__":
     train_dataset = Subset(full_dataset, train_idx)
     val_dataset = Subset(full_dataset, val_idx)
 
-    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True)
+    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True, drop_last=True)
     val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, pin_memory=True)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     drift = DRIFT().to(device)
 
+    print(f"CUDA available: {torch.cuda.is_available()}")
+    print(f"Device: {device}")
+
     supconloss = SupConLoss() #default temp = 0.1
 
     # pass in a batch of data from the dataloader to the model
 
-    epochs = 50
+    epochs = 30
 
     optimizer = torch.optim.Adam(drift.parameters(), lr=0.001)
 
-    wandb.init(project='DRIFT', config={
+    wandb.init(project='DRIFT', name='drift_train', config={
         'epochs': epochs,
         'batch_size': 128,
         'lr': 0.001,
         'temperature': 0.1,
+        'seed': 42,
     })
 
     start_epoch = 0
     best_val_loss = float('inf')
 
     if args.resume:
-        checkpoint = torch.load(args.resume)
+        checkpoint = torch.load(args.resume, map_location=device)
         drift.load_state_dict(checkpoint['model_state'])
         optimizer.load_state_dict(checkpoint['optimizer_state'])
         best_val_loss = checkpoint['best_val_loss']
@@ -62,6 +66,9 @@ if __name__ == "__main__":
         print(f'Resumed from epoch {start_epoch}')
 
     run_name = datetime.now().strftime('%Y%m%d_%H%M%S')
+
+    patience = 5
+    epochs_since_improvement = 0
     
     # training loop
     for epoch in range(start_epoch, epochs):
@@ -110,10 +117,16 @@ if __name__ == "__main__":
 
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
+            epochs_since_improvement = 0
             checkpoint['best_val_loss'] = best_val_loss
             torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
             print(f'Saved best model at epoch {epoch}')
-        
+        else:
+            epochs_since_improvement += 1
+            if epochs_since_improvement >= patience:
+                print(f'Early stopping at epoch {epoch} (no improvement for {patience} epochs)')
+                break
+                
 
 
 
