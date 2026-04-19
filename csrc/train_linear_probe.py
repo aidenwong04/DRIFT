@@ -17,7 +17,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default=None, help='checkpoint of the model you want to probe')
+    parser.add_argument('--resume', type=str, default=None, help='path to checkpoint to resume from')
+    parser.add_argument('--run_name', type=str, default=None)
     args = parser.parse_args()
+
+    run_name = args.run_name if args.run_name else datetime.now().strftime('%Y%m%d_%H%M%S')
 
     if args.model:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -44,21 +48,31 @@ if __name__ == "__main__":
         train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True)
         val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, pin_memory=True)
 
-        epochs = 10
-
         optimizer = torch.optim.Adam(linear_probe.classifier.parameters(), lr=1e-3)
         criterion = nn.CrossEntropyLoss()
 
-        wandb.init(project='DRIFT', name='linear_probe_run_clean_imgs', config={
+        epochs = 25
+        patience = 5
+        epochs_since_improvement = 0
+        best_val_loss = float('inf')
+        start_epoch = 0
+
+        wandb.init(project='DRIFT', name='linear_probe_degraded', config={
             'epochs': epochs,
             'batch_size': 128,
             'lr': 0.001,
             'seed': 42,
+            'drift_checkpoint': args.model,
         })
 
-        best_val_loss = float('inf')
+        if args.resume:
+            checkpoint = torch.load(args.resume, map_location=device)
+            linear_probe.classifier.load_state_dict(checkpoint['classifier_state'])
+            best_val_loss = checkpoint['val_loss']
+            start_epoch = checkpoint['epoch'] + 1
+            print(f'Resumed probe from {args.resume}, starting at epoch {start_epoch}')
 
-        for epoch in range(epochs):
+        for epoch in range(start_epoch, epochs):
             # trainng model
             linear_probe.train()
             print('Epoch: ' + str(epoch))
@@ -98,6 +112,23 @@ if __name__ == "__main__":
             accuracy = correct / total
             wandb.log({'val_loss': avg_val_loss, 'val_accuracy': accuracy, 'epoch': epoch})
             print(f'Epoch {epoch} Val Loss: {avg_val_loss:.4f}, Val Accuracy: {accuracy:.4f}')
+
+            if avg_val_loss < best_val_loss:
+                best_val_loss = avg_val_loss
+                epochs_since_improvement = 0
+                torch.save({
+                    'epoch': epoch,
+                    'classifier_state': linear_probe.classifier.state_dict(),
+                    'val_loss': avg_val_loss,
+                    'val_accuracy': accuracy,
+                    'drift_checkpoint': args.model,  # so we remember which backbone this goes with
+                }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/probe_best_{run_name}.pth')
+                print(f'Saved best probe at epoch {epoch}')
+            else:
+                epochs_since_improvement += 1
+                if epochs_since_improvement >= patience:
+                    print(f'Early stopping at epoch {epoch}')
+                    break
     
     else:
         print("Model checkpoint missing.")
