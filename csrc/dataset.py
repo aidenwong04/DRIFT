@@ -11,13 +11,27 @@ import transformations
 # we load an image using pillow (python image loader), and then we return a pytorch tensor object in _getitem_.
 
 class WILDDataset(Dataset):
-    def __init__(self, root):
+    def __init__(self, root, mode="train"):
+        """
+        mode: "train" -> two degraded views (for SupCon training)
+              "clean" -> one clean view (for clean eval)
+              "degraded" -> one degraded view (for robustness eval)
+        """
         #ROOT = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
+        assert mode in ("train", "clean", "degraded")
+        self.mode = mode
         self.root = root
         self.models = sorted([sub_dir.name for sub_dir in self.root.iterdir() if sub_dir.is_dir()]) # list of all image generators
         self.models_to_idx = {name: idx for (idx, name) in enumerate(self.models)} # dictionary class to idx
         self.samples = []
         self.transform = transformations.DegradationPipeline()
+
+        self.clean_transform = transforms.Compose([
+            transforms.Resize((256, 256)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ]) # just skips the degradation
 
         for sub_dir in sorted(root.iterdir()):
             if sub_dir.is_dir(): # these are all the model names
@@ -34,10 +48,14 @@ class WILDDataset(Dataset):
         # returns two differently degraded copies of the same image 
         path, model_idx = self.samples[idx]
         img = Image.open(path).convert("RGB")
-        view1 = self.transform(img)
-        view2 = self.transform(img)
-        return view1, view2, model_idx
 
+        if self.mode == "train":
+            return self.transform(img), self.transform(img), model_idx
+        elif self.mode == "clean":
+            return self.clean_transform(img), model_idx
+        else:  # degraded
+            return self.transform(img), model_idx
+            
 if __name__ == "__main__":
     root = Path("/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set")
     dataset = WILDDataset(root)
