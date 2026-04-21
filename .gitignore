@@ -1,8 +1,11 @@
 drift_env/
 scripts/
 __pycache__/
+*.pyc
 logs/
 checkpoints/
 *.pth
+*.pt
+!splits/*.pt
 /wandb
 tea_debug.log
