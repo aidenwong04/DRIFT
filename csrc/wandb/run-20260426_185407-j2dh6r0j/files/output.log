@@ -1,0 +1,50 @@
+
+Epoch 0
+Traceback (most recent call last):
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/train_baseline.py", line 223, in <module>
+    main()
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/train_baseline.py", line 164, in main
+    logits = model(images)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/baseline_model.py", line 81, in forward
+    features = self.encoder(x).float()
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/clip/model.py", line 232, in forward
+    x = self.transformer(x)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/clip/model.py", line 203, in forward
+    return self.resblocks(x)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/clip/model.py", line 191, in forward
+    x = x + self.mlp(self.ln_2(x))
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt

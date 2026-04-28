@@ -1,0 +1,50 @@
+
+Epoch 0
+  Val loss: 1.6314  Val acc: 0.6793
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 1
+  Val loss: 1.2609  Val acc: 0.7627
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 2
+  Val loss: 1.0435  Val acc: 0.8020
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 3
+  Val loss: 0.9018  Val acc: 0.8233
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 4
+  Val loss: 0.7993  Val acc: 0.8367
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 5
+  Val loss: 0.7219  Val acc: 0.8533
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 6
+  Val loss: 0.6639  Val acc: 0.8640
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 7
+  Val loss: 0.6166  Val acc: 0.8673
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 8
+  Val loss: 0.5753  Val acc: 0.8780
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 9
+  Val loss: 0.5414  Val acc: 0.8873
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 10
+  Val loss: 0.5184  Val acc: 0.8827
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 11
+  Val loss: 0.4914  Val acc: 0.8907
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 12

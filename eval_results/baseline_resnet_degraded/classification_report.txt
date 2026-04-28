@@ -1,0 +1,35 @@
+Arch:       resnet
+Mode:       degraded
+Checkpoint: checkpoints/baseline_resnet_best_20260426_174958.pth
+Seed:       42
+Test samples: 1500
+Overall accuracy: 0.7147
+
+Per-class accuracy:
+  Adobe Firefly                  0.8235
+  Dall-E 3                       0.6627
+  Flux.1                         0.7063
+  Flux.1.1 Pro                   0.7727
+  Freepik                        0.8224
+  Leonardo AI                    0.8544
+  Midjourney                     0.5247
+  Stable Diffusion 3.5           0.5929
+  Stable Diffusion XL            0.7655
+  Starry AI                      0.6443
+
+                      precision    recall  f1-score   support
+
+       Adobe Firefly     0.7179    0.8235    0.7671       136
+            Dall-E 3     0.9821    0.6627    0.7914       166
+              Flux.1     0.9417    0.7063    0.8071       160
+        Flux.1.1 Pro     0.9444    0.7727    0.8500       132
+             Freepik     0.6378    0.8224    0.7184       152
+         Leonardo AI     0.9712    0.8544    0.9091       158
+          Midjourney     0.9770    0.5247    0.6827       162
+Stable Diffusion 3.5     0.9432    0.5929    0.7281       140
+ Stable Diffusion XL     0.3265    0.7655    0.4577       145
+           Starry AI     0.6234    0.6443    0.6337       149
+
+            accuracy                         0.7147      1500
+           macro avg     0.8065    0.7169    0.7345      1500
+        weighted avg     0.8113    0.7147    0.7355      1500

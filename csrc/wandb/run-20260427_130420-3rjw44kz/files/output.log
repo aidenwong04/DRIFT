@@ -1,0 +1,38 @@
+
+Epoch 12
+  Val loss: 0.4681  Val acc: 0.8980
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 13
+  Val loss: 0.4502  Val acc: 0.9027
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 14
+  Val loss: 0.4341  Val acc: 0.9020
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 15
+  Val loss: 0.4193  Val acc: 0.9053
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 16
+  Val loss: 0.4070  Val acc: 0.9053
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 17
+  Val loss: 0.3929  Val acc: 0.9073
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 18
+  Val loss: 0.3829  Val acc: 0.9107
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 19
+  Val loss: 0.3736  Val acc: 0.9107
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 20
+  Val loss: 0.3629  Val acc: 0.9127
+  ✓ New best saved → /projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/baseline_clip_best_clip_clean_baseline.pth
+
+Epoch 21

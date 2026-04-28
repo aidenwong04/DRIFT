@@ -1,0 +1,20 @@
+
+Epoch 0
+Traceback (most recent call last):
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/train_baseline.py", line 223, in <module>
+    main()
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/train_baseline.py", line 164, in main
+    logits = model(images)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/baseline_model.py", line 79, in forward
+    features = self.encoder(x).float()
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/lib/python3.10/site-packages/clip/model.py", line 228, in forward
+    x = x + self.positional_embedding.to(x.dtype)
+RuntimeError: The size of tensor a (65) must match the size of tensor b (50) at non-singleton dimension 1

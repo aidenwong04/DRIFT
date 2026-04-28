@@ -1,0 +1,35 @@
+{
+  "os": "Linux-4.18.0-553.94.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "python": "CPython 3.10.20",
+  "startedAt": "2026-04-26T23:08:22.211510Z",
+  "args": [
+    "--arch",
+    "clip",
+    "--lr",
+    "1e-3",
+    "--run_name",
+    "clip_clean_baseline"
+  ],
+  "program": "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/train_baseline.py",
+  "codePath": "train_baseline.py",
+  "codePathLocal": "train_baseline.py",
+  "git": {
+    "remote": "https://github.com/aidenwong04/DRIFT.git"
+  },
+  "email": "soy26@bu.edu",
+  "root": "/projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc",
+  "host": "scc-pi1",
+  "executable": "/projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/bin/python",
+  "cpu_count": 16,
+  "cpu_count_logical": 16,
+  "disk": {
+    "/": {
+      "total": "20957446144",
+      "used": "13761495040"
+    }
+  },
+  "memory": {
+    "total": "134550122496"
+  },
+  "writerId": "pff4nlimbzppbr80putsua1zvwz6fh0l"
+}

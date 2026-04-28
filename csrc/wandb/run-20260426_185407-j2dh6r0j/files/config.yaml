@@ -1,0 +1,65 @@
+_wandb:
+    value:
+        cli_version: 0.26.0
+        e:
+            t9mskbjjkm3h8xtibc6kt646h9yfbkb8:
+                args:
+                    - --arch
+                    - clip
+                    - --lr
+                    - "1e-3"
+                    - --run_name
+                    - clip_clean_baseline
+                codePath: train_baseline.py
+                codePathLocal: train_baseline.py
+                cpu_count: 32
+                cpu_count_logical: 32
+                disk:
+                    /:
+                        total: "20957446144"
+                        used: "14570397696"
+                email: soy26@bu.edu
+                executable: /projectnb/cs585/projects/ASUFratLeader/DRIFT/drift_env/bin/python
+                git:
+                    remote: https://github.com/aidenwong04/DRIFT.git
+                host: scc1
+                memory:
+                    total: "268477095936"
+                os: Linux-4.18.0-553.94.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/train_baseline.py
+                python: CPython 3.10.20
+                root: /projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc
+                startedAt: "2026-04-26T22:54:07.056513Z"
+                writerId: t9mskbjjkm3h8xtibc6kt646h9yfbkb8
+        m: []
+        python_version: 3.10.20
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+                - 16
+            "4": 3.10.20
+            "5": 0.26.0
+            "12": 0.26.0
+            "13": linux-x86_64
+arch:
+    value: clip
+batch_size:
+    value: 128
+epochs:
+    value: 30
+lr:
+    value: 0.001
+patience:
+    value: 5
+resume:
+    value: null
+run_name:
+    value: clip_clean_baseline
+seed:
+    value: 42
