@@ -11,7 +11,7 @@ import transformations
 # we load an image using pillow (python image loader), and then we return a pytorch tensor object in _getitem_.
 
 class WILDDataset(Dataset):
-    def __init__(self, root, mode="train"):
+    def __init__(self, root, mode="train", disabled_degradations=None):        
         """
         mode: "train" -> two degraded views (for SupCon training)
               "clean" -> one clean view (for clean eval)
@@ -21,10 +21,23 @@ class WILDDataset(Dataset):
         assert mode in ("train", "clean", "degraded")
         self.mode = mode
         self.root = root
-        self.models = sorted([sub_dir.name for sub_dir in self.root.iterdir() if sub_dir.is_dir()]) # list of all image generators
+        # self.models = sorted([sub_dir.name for sub_dir in self.root.iterdir() if sub_dir.is_dir()]) # list of all image generators
+        self.models = [
+            "Adobe Firefly",
+            "Dall-E 3",
+            "Flux.1",
+            "Flux.1.1 Pro",
+            "Freepik",
+            "Leonardo AI",
+            "Midjourney",
+            "Stable Diffusion 3.5",
+            "Stable Diffusion XL",
+            "Starry AI",
+        ]
         self.models_to_idx = {name: idx for (idx, name) in enumerate(self.models)} # dictionary class to idx
         self.samples = []
-        self.transform = transformations.DegradationPipeline()
+        # self.transform = transformations.DegradationPipeline()
+        self.transform = transformations.DegradationPipeline(disabled=disabled_degradations)
 
         self.clean_transform = transforms.Compose([
             transforms.Resize((256, 256)),
@@ -40,7 +53,7 @@ class WILDDataset(Dataset):
                     # img is a path
                     if img.suffix == '.png':
                         self.samples.append((img, self.models_to_idx[sub_dir.name]))
-
+ 
     def __len__(self):
         return len(self.samples)
     
