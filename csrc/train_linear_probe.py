@@ -34,7 +34,7 @@ if __name__ == "__main__":
         model = torch.load(args.model, map_location=device)
         drift.load_state_dict(model['model_state'])
 
-        linear_probe = LinearProbe(drift.backbone, 10).to(device)  # init the linear probe model
+        linear_probe = LinearProbe(drift.backbone, 10, feat_dim=drift.backbone.config.hidden_size).to(device)  # init the linear probe model
 
         root = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
         full_dataset = WILDDataset(root)
