@@ -71,6 +71,8 @@ def main():
     parser.add_argument('--num_workers', type=int, default=0,
                         help='keep at 0 for reproducible degraded eval '
                              '(multi-worker RNG state is non-deterministic by default)')
+    parser.add_argument('--disable', nargs='*', default=[])
+    
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -85,7 +87,11 @@ def main():
     print(f'Saving to: {out_dir}')
 
     # initialize the dataset
-    full_dataset = WILDDataset(ROOT, mode=args.mode)
+    full_dataset = WILDDataset(
+        ROOT,
+        mode=args.mode,
+        disabled_degradations=args.disable
+    )    
     test_idx = torch.load(SPLIT_DIR / 'test_idx.pt')
     test_dataset = Subset(full_dataset, test_idx)
     test_loader = DataLoader(
@@ -163,7 +169,7 @@ def main():
             f.write(f'  {name:30s} {a:.4f}\n')
         f.write('\n')
         f.write(report)
-
+ 
     # row-normalized confusion matrix (each row sums to 1) — easier to read
     # for the paper than raw counts since classes may be slightly imbalanced
     cm_norm = cm / cm.sum(axis=1, keepdims=True).clip(min=1)

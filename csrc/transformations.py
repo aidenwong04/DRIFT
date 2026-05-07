@@ -3,7 +3,7 @@ import random
 from PIL import Image, ImageFilter, ImageEnhance
 from torchvision import transforms
 import numpy as np
-
+ 
 class JPEGCompression:
     def __init__(self, quality_range=(10, 50)):
         self.quality_range = quality_range
@@ -63,14 +63,52 @@ class ScreenShot:
 
 # here is the pipeline that randomly selects the transformations and applies them to an image.
 
+# class DegradationPipeline:
+#     def __init__(self):
+#         self.transforms = [
+#             JPEGCompression(),
+#             GaussianBlur(),
+#             GaussianNoise(),
+#             ReUpload(),
+#             ScreenShot(),
+#         ]
+
+#         self.finalize = transforms.Compose([
+#             transforms.Resize((256, 256)),
+#             transforms.ToTensor(),
+#             transforms.Normalize(mean=[0.485, 0.456, 0.406],
+#                                 std=[0.229, 0.224, 0.225]),
+#         ])
+
+#     def __call__(self, img):
+#         # sometimes apply one, sometimes a combination
+#         if random.random() < 0.3:  # 30% chance of combination
+#             k = random.randint(2, 3)
+#             chosen = random.sample(self.transforms, k)
+#             for t in chosen:
+#                 img = t(img)
+#         else:
+#             t = random.choice(self.transforms)
+#             img = t(img)
+
+#         return self.finalize(img)
+    
 class DegradationPipeline:
-    def __init__(self):
+    def __init__(self, disabled=None):
+        if disabled is None:
+            disabled = []
+
+        all_transforms = {
+            "jpeg": JPEGCompression(),
+            "blur": GaussianBlur(),
+            "noise": GaussianNoise(),
+            "reupload": ReUpload(),
+            "screenshot": ScreenShot(),
+        }
+
         self.transforms = [
-            JPEGCompression(),
-            GaussianBlur(),
-            GaussianNoise(),
-            ReUpload(),
-            ScreenShot(),
+            transform for name, transform in all_transforms.items()
+            if name not in disabled
         ]
 
         self.finalize = transforms.Compose([
@@ -81,9 +119,11 @@ class DegradationPipeline:
         ])
 
     def __call__(self, img):
-        # sometimes apply one, sometimes a combination
-        if random.random() < 0.3:  # 30% chance of combination
-            k = random.randint(2, 3)
+        if len(self.transforms) == 0:
+            return self.finalize(img)
+
+        if random.random() < 0.3:
+            k = min(random.randint(2, 3), len(self.transforms))
             chosen = random.sample(self.transforms, k)
             for t in chosen:
                 img = t(img)
