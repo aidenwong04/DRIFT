@@ -1,0 +1,35 @@
+Mode: degraded
+DRIFT checkpoint: ../checkpoints/best_model_20260417_155351.pth
+Probe checkpoint: ../checkpoints/probe_best_20260418_174843.pth
+Seed: 42
+Test samples: 1500
+Overall accuracy: 0.9453
+
+Per-class accuracy:
+  Adobe Firefly                  0.9485
+  Dall-E 3                       0.9157
+  Flux.1                         0.9563
+  Flux.1.1 Pro                   0.9621
+  Freepik                        0.9803
+  Leonardo AI                    0.8734
+  Midjourney                     0.8642
+  Stable Diffusion 3.5           0.9929
+  Stable Diffusion XL            0.9931
+  Starry AI                      0.9866
+
+                      precision    recall  f1-score   support
+
+       Adobe Firefly     0.9556    0.9485    0.9520       136
+            Dall-E 3     0.9870    0.9157    0.9500       166
+              Flux.1     0.9935    0.9563    0.9745       160
+        Flux.1.1 Pro     0.9922    0.9621    0.9769       132
+             Freepik     0.9933    0.9803    0.9868       152
+         Leonardo AI     0.9857    0.8734    0.9262       158
+          Midjourney     0.8485    0.8642    0.8563       162
+Stable Diffusion 3.5     0.9267    0.9929    0.9586       140
+ Stable Diffusion XL     0.9863    0.9931    0.9897       145
+           Starry AI     0.8258    0.9866    0.8991       149
+
+            accuracy                         0.9453      1500
+           macro avg     0.9495    0.9473    0.9470      1500
+        weighted avg     0.9491    0.9453    0.9458      1500

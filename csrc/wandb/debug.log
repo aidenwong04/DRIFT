@@ -1,1 +1,21 @@
-run-20260427_130420-3rjw44kz/logs/debug.log
+2026-04-28 00:10:08,741 INFO    MainThread:3165883 [wandb_setup.py:_flush():81] Current SDK version is 0.26.0
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_setup.py:_flush():81] Configure stats pid to 3165883
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_init.py:setup_run_log_directory():721] Logging user logs to /projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/wandb/run-20260428_001008-lgfon44y/logs/debug.log
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_init.py:setup_run_log_directory():722] Logging internal logs to /projectnb/cs585/projects/ASUFratLeader/DRIFT/csrc/wandb/run-20260428_001008-lgfon44y/logs/debug-internal.log
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_init.py:init():848] calling init triggers
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_init.py:init():853] wandb.init called with sweep_config: {}
+config: {'arch': 'clip', 'resume': '../checkpoints/baseline_clip_latest_clip_clean_baseline.pth', 'run_name': 'clip_clean_baseline', 'epochs': 30, 'batch_size': 128, 'lr': 0.001, 'patience': 5, 'seed': 42, '_wandb': {}}
+2026-04-28 00:10:08,742 INFO    MainThread:3165883 [wandb_init.py:init():896] starting backend
+2026-04-28 00:10:09,760 INFO    MainThread:3165883 [wandb_init.py:init():911] sending inform_init request
+2026-04-28 00:10:09,786 INFO    MainThread:3165883 [wandb_init.py:init():919] backend started and connected
+2026-04-28 00:10:09,964 INFO    MainThread:3165883 [wandb_init.py:init():989] updated telemetry
+2026-04-28 00:10:09,970 INFO    MainThread:3165883 [wandb_init.py:init():1013] communicating run to backend with 90.0 second timeout
+2026-04-28 00:10:10,677 INFO    MainThread:3165883 [wandb_init.py:init():1058] starting run threads in backend
+2026-04-28 00:10:11,481 INFO    MainThread:3165883 [wandb_run.py:_console_start():2542] atexit reg
+2026-04-28 00:10:11,481 INFO    MainThread:3165883 [wandb_run.py:_redirect():2391] redirect: wrap_raw
+2026-04-28 00:10:11,481 INFO    MainThread:3165883 [wandb_run.py:_redirect():2460] Wrapping output streams.
+2026-04-28 00:10:11,481 INFO    MainThread:3165883 [wandb_run.py:_redirect():2483] Redirects installed.
+2026-04-28 00:10:11,517 INFO    MainThread:3165883 [wandb_init.py:init():1098] run started, returning control to user process
+2026-04-28 02:57:56,420 INFO    wandb-AsyncioManager-main:3165883 [service_client.py:_forward_responses():134] Reached EOF.
+2026-04-28 02:57:56,420 INFO    wandb-AsyncioManager-main:3165883 [mailbox.py:close():155] Closing mailbox, abandoning 1 handles.

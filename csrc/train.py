@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     epochs = 30
 
-    optimizer = torch.optim.Adam(drift.parameters(), lr=0.001)
+    optimizer = torch.optim.Adam(drift.projection_head.parameters(), lr=0.001)
 
     wandb.init(project='DRIFT', name='drift_train', config={
         'epochs': epochs,

@@ -1,0 +1,35 @@
+Arch:       clip
+Mode:       degraded
+Checkpoint: ../checkpoints/baseline_clip_latest_clip_clean_baseline.pth
+Seed:       42
+Test samples: 1500
+Overall accuracy: 0.6913
+
+Per-class accuracy:
+  Adobe Firefly                  0.7426
+  Dall-E 3                       0.8373
+  Flux.1                         0.6813
+  Flux.1.1 Pro                   0.6212
+  Freepik                        0.8684
+  Leonardo AI                    0.6329
+  Midjourney                     0.4691
+  Stable Diffusion 3.5           0.7429
+  Stable Diffusion XL            0.5793
+  Starry AI                      0.7383
+
+                      precision    recall  f1-score   support
+
+       Adobe Firefly     0.6012    0.7426    0.6645       136
+            Dall-E 3     0.9205    0.8373    0.8770       166
+              Flux.1     0.7899    0.6813    0.7315       160
+        Flux.1.1 Pro     0.6212    0.6212    0.6212       132
+             Freepik     0.8742    0.8684    0.8713       152
+         Leonardo AI     0.9259    0.6329    0.7519       158
+          Midjourney     0.8736    0.4691    0.6104       162
+Stable Diffusion 3.5     0.6842    0.7429    0.7123       140
+ Stable Diffusion XL     0.3750    0.5793    0.4553       145
+           Starry AI     0.5820    0.7383    0.6509       149
+
+            accuracy                         0.6913      1500
+           macro avg     0.7248    0.6913    0.6946      1500
+        weighted avg     0.7337    0.6913    0.6986      1500
