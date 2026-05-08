@@ -22,14 +22,14 @@ if __name__ == "__main__":
     root = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
     full_dataset = WILDDataset(root)
 
-    train_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT/splits/train_idx.pt')
-    val_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT/splits/val_idx.pt')
+    train_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/splits/train_idx.pt')
+    val_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/splits/val_idx.pt')
 
     train_dataset = Subset(full_dataset, train_idx)
     val_dataset = Subset(full_dataset, val_idx)
 
-    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True, drop_last=True)
-    val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, pin_memory=True)
+    train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, pin_memory=True, drop_last=True, num_workers=4)
+    val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False, pin_memory=True, num_workers=4)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     drift = DRIFT().to(device)
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     optimizer = torch.optim.Adam(drift.projection_head.parameters(), lr=0.001)
 
-    wandb.init(project='DRIFT', name='drift_train', config={
+    wandb.init(project='DRIFT', name='drift_dinov3_train', config={
         'epochs': epochs,
         'batch_size': 128,
         'lr': 0.001,
@@ -113,13 +113,13 @@ if __name__ == "__main__":
             'best_val_loss': best_val_loss,
         }
 
-        torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/latest_{run_name}.pth')
+        torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/latest_{run_name}.pth')
 
         if avg_val_loss < best_val_loss:
             best_val_loss = avg_val_loss
             epochs_since_improvement = 0
             checkpoint['best_val_loss'] = best_val_loss
-            torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/best_model_{run_name}.pth')
+            torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/best_model_{run_name}.pth')
             print(f'Saved best model at epoch {epoch}')
         else:
             epochs_since_improvement += 1
