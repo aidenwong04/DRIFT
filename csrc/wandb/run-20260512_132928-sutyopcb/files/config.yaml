@@ -1,0 +1,83 @@
+_wandb:
+    value:
+        cli_version: 0.26.1
+        e:
+            4tb2hjxy29mko9t4id24d80bpt5tuicc:
+                args:
+                    - --model
+                    - /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/best_model_20260507_161029.pth
+                    - --resume
+                    - /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/probe_best_20260511_162242.pth
+                codePath: csrc/train_linear_probe.py
+                codePathLocal: train_linear_probe.py
+                cpu_count: 32
+                cpu_count_logical: 32
+                cudaVersion: "13.2"
+                disk:
+                    /:
+                        total: "20957446144"
+                        used: "16213704704"
+                email: ahcmwong@bu.edu
+                executable: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/drift_env/bin/python
+                git:
+                    commit: 617b01223ee7c399553062eec136ff9da3f4573b
+                    remote: https://github.com/aidenwong04/DRIFT.git
+                gpu: NVIDIA A40
+                gpu_count: 2
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-8ebc0769-b1b4-ca69-a9a5-75c3d9260fba
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-47f9e3f1-1782-1e44-56a2-96e8ffe81cc1
+                host: scc-218
+                memory:
+                    total: "269217492992"
+                os: Linux-4.18.0-553.123.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc/train_linear_probe.py
+                python: CPython 3.14.4
+                root: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc
+                startedAt: "2026-05-12T17:29:28.215231Z"
+                writerId: 4tb2hjxy29mko9t4id24d80bpt5tuicc
+        m: []
+        python_version: 3.14.4
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 53
+            "2":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 53
+            "3":
+                - 13
+                - 16
+            "4": 3.14.4
+            "5": 0.26.1
+            "6": 5.8.0
+            "8":
+                - 2
+            "12": 0.26.1
+            "13": linux-x86_64
+batch_size:
+    value: 128
+drift_checkpoint:
+    value: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/best_model_20260507_161029.pth
+epochs:
+    value: 40
+lr:
+    value: 0.001
+seed:
+    value: 42

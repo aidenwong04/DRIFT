@@ -1,0 +1,87 @@
+_wandb:
+    value:
+        cli_version: 0.26.1
+        e:
+            1c75xrgipt671uel69y95dn5wgn4lsli:
+                args:
+                    - --model
+                    - /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/best_model_20260507_161029.pth
+                codePath: csrc/train_linear_probe.py
+                codePathLocal: train_linear_probe.py
+                cpu_count: 32
+                cpu_count_logical: 32
+                cudaVersion: "13.2"
+                disk:
+                    /:
+                        total: "20957446144"
+                        used: "16222625792"
+                email: ahcmwong@bu.edu
+                executable: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/drift_env/bin/python
+                git:
+                    commit: 617b01223ee7c399553062eec136ff9da3f4573b
+                    remote: https://github.com/aidenwong04/DRIFT.git
+                gpu: NVIDIA L40S
+                gpu_count: 4
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "48305799168"
+                      name: NVIDIA L40S
+                      uuid: GPU-223f7249-e1ed-3dcf-0f4e-975a7dad15f1
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "48305799168"
+                      name: NVIDIA L40S
+                      uuid: GPU-7b5eaaa2-04a9-aee0-e20c-531dd494a10f
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "48305799168"
+                      name: NVIDIA L40S
+                      uuid: GPU-f2f5fb09-6b8a-b4e6-fa7d-aa41b28b12e6
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "48305799168"
+                      name: NVIDIA L40S
+                      uuid: GPU-02c6b14f-dc2a-002e-7e23-2091d63ae708
+                host: scc-501
+                memory:
+                    total: "269413867520"
+                os: Linux-4.18.0-553.123.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc/train_linear_probe.py
+                python: CPython 3.14.4
+                root: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc
+                startedAt: "2026-05-11T03:05:56.296718Z"
+                writerId: 1c75xrgipt671uel69y95dn5wgn4lsli
+        m: []
+        python_version: 3.14.4
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+            "3":
+                - 13
+                - 16
+            "4": 3.14.4
+            "5": 0.26.1
+            "6": 5.8.0
+            "8":
+                - 2
+            "12": 0.26.1
+            "13": linux-x86_64
+batch_size:
+    value: 128
+drift_checkpoint:
+    value: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/best_model_20260507_161029.pth
+epochs:
+    value: 25
+lr:
+    value: 0.001
+seed:
+    value: 42

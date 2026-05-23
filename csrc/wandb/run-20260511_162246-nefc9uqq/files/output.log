@@ -1,0 +1,41 @@
+Resumed probe from /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/probe_best_20260510_230552.pth, starting at epoch 25
+Epoch: 25
+Epoch 25 Val Loss: 0.2062, Val Accuracy: 0.9487
+Saved best probe at epoch 25
+Epoch: 26
+Epoch 26 Val Loss: 0.2132, Val Accuracy: 0.9473
+Epoch: 27
+Epoch 27 Val Loss: 0.2033, Val Accuracy: 0.9453
+Saved best probe at epoch 27
+Epoch: 28
+Epoch 28 Val Loss: 0.1945, Val Accuracy: 0.9467
+Saved best probe at epoch 28
+Epoch: 29
+Epoch 29 Val Loss: 0.1885, Val Accuracy: 0.9487
+Saved best probe at epoch 29
+Epoch: 30
+Epoch 30 Val Loss: 0.1919, Val Accuracy: 0.9473
+Epoch: 31
+Epoch 31 Val Loss: 0.1794, Val Accuracy: 0.9507
+Saved best probe at epoch 31
+Epoch: 32
+Epoch 32 Val Loss: 0.1791, Val Accuracy: 0.9467
+Saved best probe at epoch 32
+Epoch: 33
+Epoch 33 Val Loss: 0.1822, Val Accuracy: 0.9493
+Epoch: 34
+Epoch 34 Val Loss: 0.1836, Val Accuracy: 0.9500
+Epoch: 35
+Epoch 35 Val Loss: 0.1757, Val Accuracy: 0.9493
+Saved best probe at epoch 35
+Epoch: 36
+Epoch 36 Val Loss: 0.1742, Val Accuracy: 0.9420
+Saved best probe at epoch 36
+Epoch: 37
+Epoch 37 Val Loss: 0.1676, Val Accuracy: 0.9553
+Saved best probe at epoch 37
+Epoch: 38
+Epoch 38 Val Loss: 0.1683, Val Accuracy: 0.9493
+Epoch: 39
+Epoch 39 Val Loss: 0.1627, Val Accuracy: 0.9513
+Saved best probe at epoch 39

@@ -113,6 +113,14 @@ if __name__ == "__main__":
             'best_val_loss': best_val_loss,
         }
 
+        lean_checkpoint = {
+            'projection_head_state': drift.projection_head.state_dict(),
+            'epoch': checkpoint['epoch'],
+            'best_val_loss': checkpoint['best_val_loss'],
+            'backbone_name': 'facebook/dinov3-vitb16-pretrain-lvd1689m',
+            'embed_dim': 128,
+        }
+        torch.save(lean_checkpoint, '/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/drift_projection_head_only.pth')
         torch.save(checkpoint, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/latest_{run_name}.pth')
 
         if avg_val_loss < best_val_loss:

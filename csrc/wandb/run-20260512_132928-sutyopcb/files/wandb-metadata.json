@@ -1,0 +1,53 @@
+{
+  "os":  "Linux-4.18.0-553.123.1.el8_10.x86_64-x86_64-with-glibc2.28",
+  "python":  "CPython 3.14.4",
+  "startedAt":  "2026-05-12T17:29:28.215231Z",
+  "args":  [
+    "--model",
+    "/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/best_model_20260507_161029.pth",
+    "--resume",
+    "/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/probe_best_20260511_162242.pth"
+  ],
+  "program":  "/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc/train_linear_probe.py",
+  "codePath":  "csrc/train_linear_probe.py",
+  "codePathLocal":  "train_linear_probe.py",
+  "git":  {
+    "remote":  "https://github.com/aidenwong04/DRIFT.git",
+    "commit":  "617b01223ee7c399553062eec136ff9da3f4573b"
+  },
+  "email":  "ahcmwong@bu.edu",
+  "root":  "/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc",
+  "host":  "scc-218",
+  "executable":  "/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/drift_env/bin/python",
+  "cpu_count":  32,
+  "cpu_count_logical":  32,
+  "gpu":  "NVIDIA A40",
+  "gpu_count":  2,
+  "disk":  {
+    "/":  {
+      "total":  "20957446144",
+      "used":  "16213704704"
+    }
+  },
+  "memory":  {
+    "total":  "269217492992"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A40",
+      "memoryTotal":  "48305799168",
+      "cudaCores":  10752,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-8ebc0769-b1b4-ca69-a9a5-75c3d9260fba"
+    },
+    {
+      "name":  "NVIDIA A40",
+      "memoryTotal":  "48305799168",
+      "cudaCores":  10752,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-47f9e3f1-1782-1e44-56a2-96e8ffe81cc1"
+    }
+  ],
+  "cudaVersion":  "13.2",
+  "writerId":  "4tb2hjxy29mko9t4id24d80bpt5tuicc"
+}

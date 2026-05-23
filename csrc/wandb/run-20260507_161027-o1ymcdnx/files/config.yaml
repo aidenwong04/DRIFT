@@ -1,0 +1,84 @@
+_wandb:
+    value:
+        cli_version: 0.26.1
+        e:
+            2n1t086amnjbf9jqw5xugjxkg4v7r6t4:
+                codePath: csrc/train.py
+                codePathLocal: train.py
+                cpu_count: 32
+                cpu_count_logical: 32
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "20957446144"
+                        used: "16167411712"
+                email: ahcmwong@bu.edu
+                executable: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/drift_env/bin/python
+                git:
+                    commit: ee6d288e26cfd7b5ec1364927cec3d18fe2bfd72
+                    remote: https://github.com/aidenwong04/DRIFT.git
+                gpu: NVIDIA A40
+                gpu_count: 4
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-b172720c-5cea-cd82-b414-2a4cac157d2c
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-e79fda29-af94-e8b6-bfd5-d326101fa580
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-1e6b7831-04ac-22db-f0e2-0c0b640324e1
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "48305799168"
+                      name: NVIDIA A40
+                      uuid: GPU-c75bace0-2eb6-5e01-93a1-89fbf0a20001
+                host: scc-211
+                memory:
+                    total: "269217484800"
+                os: Linux-4.18.0-553.94.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc/train.py
+                python: CPython 3.14.4
+                root: /projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/csrc
+                startedAt: "2026-05-07T20:10:27.292304Z"
+                writerId: 2n1t086amnjbf9jqw5xugjxkg4v7r6t4
+        m: []
+        python_version: 3.14.4
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+            "3":
+                - 13
+                - 16
+            "4": 3.14.4
+            "5": 0.26.1
+            "6": 5.8.0
+            "8":
+                - 2
+            "12": 0.26.1
+            "13": linux-x86_64
+batch_size:
+    value: 128
+epochs:
+    value: 30
+lr:
+    value: 0.001
+seed:
+    value: 42
+temperature:
+    value: 0.1

@@ -39,8 +39,8 @@ if __name__ == "__main__":
         root = Path('/projectnb/cs585/projects/ASUFratLeader/data/Data/Closed_Set')
         full_dataset = WILDDataset(root)
 
-        train_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT/splits/train_idx.pt')
-        val_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT/splits/val_idx.pt')
+        train_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/splits/train_idx.pt')
+        val_idx = torch.load('/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/splits/val_idx.pt')
 
         train_dataset = Subset(full_dataset, train_idx)
         val_dataset = Subset(full_dataset, val_idx)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         optimizer = torch.optim.Adam(linear_probe.classifier.parameters(), lr=1e-3)
         criterion = nn.CrossEntropyLoss()
 
-        epochs = 25
+        epochs = 40
         patience = 5
         epochs_since_improvement = 0
         best_val_loss = float('inf')
@@ -122,7 +122,7 @@ if __name__ == "__main__":
                     'val_loss': avg_val_loss,
                     'val_accuracy': accuracy,
                     'drift_checkpoint': args.model,  # so we remember which backbone this goes with
-                }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT/checkpoints/probe_best_{run_name}.pth')
+                }, f'/projectnb/cs585/projects/ASUFratLeader/DRIFT_NEW/checkpoints/probe_best_{run_name}.pth')
                 print(f'Saved best probe at epoch {epoch}')
             else:
                 epochs_since_improvement += 1
