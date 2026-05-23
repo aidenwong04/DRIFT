@@ -51,7 +51,7 @@ if __name__ == "__main__":
         optimizer = torch.optim.Adam(linear_probe.classifier.parameters(), lr=1e-3)
         criterion = nn.CrossEntropyLoss()
 
-        epochs = 40
+        epochs = 100
         patience = 5
         epochs_since_improvement = 0
         best_val_loss = float('inf')
