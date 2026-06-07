@@ -11,7 +11,8 @@ sys.path.append(target_folder)
 
 from model import DRIFT
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 ckpt_path = hf_hub_download(
     repo_id='aidenite/drift-dinov3-vitb16',
@@ -26,7 +27,7 @@ model.projection_head.load_state_dict(lean['projection_head_state'])
 model.eval()
 
 batch_size = 1
-input_tensor = torch.randn(batch_size, 3, 224, 224)
+input_tensor = torch.randn(batch_size, 3, 224, 224).to(device)
 
 # warmup
 with torch.inference_mode():
@@ -42,6 +43,8 @@ with torch.inference_mode():
         _ = model(input_tensor)
         latencies.append((time.perf_counter() - start) * 1000)
 
-print(f"Average Latency: {np.mean(latencies):.2f} ms")
-print(f"P95 Latency: {np.percentile(latencies, 95):.2f} ms")
-print(f"P99 Latency: {np.percentile(latencies, 99):.2f} ms")
+with open("output.txt", "a", encoding="utf-8") as file:
+    file.write("PyTorch Inference Latency (CPU):\n")
+    file.write(f"Average Latency: {np.mean(latencies):.2f} ms\n")
+    file.write(f"P95 Latency: {np.percentile(latencies, 95):.2f} ms\n")
+    file.write(f"P99 Latency: {np.percentile(latencies, 99):.2f} ms\n")

@@ -1,0 +1,14 @@
+ONNX Inference Latency (CPU):
+Average Latency: 225.22 ms
+P95 Latency: 419.57 ms
+P99 Latency: 515.91 ms
+
+PyTorch Inference Latency (GPU):
+Average Latency: 40.68 ms
+P95 Latency: 49.60 ms
+P99 Latency: 119.67 ms
+
+PyTorch Inference Latency (CPU):
+Average Latency: 299.07 ms
+P95 Latency: 566.96 ms
+P99 Latency: 892.69 ms
