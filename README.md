@@ -1,10 +1,10 @@
 ## About
 
-**DRIFT** (Diffusion-Robust Invariant Fingerprint Training) is a production-grade synthetic image attribution system that identifies which of 10 commercial AI image generators produced a given image — even after the image has been compressed, resized, screenshotted, or re-uploaded through social media platforms.
+**DRIFT** (Diffusion-Robust Invariant Fingerprint Training) is a production-grade synthetic image attribution system that identifies which of 10 commercial AI image generators produced a given image, even after the image has been compressed, resized, screenshotted, or re-uploaded through social media platforms.
 
 ### The Problem
 
-AI-generated images are rarely distributed in pristine form. Before reaching a viewer, they are typically JPEG-compressed, resized, re-uploaded through social platforms, or screenshotted. These post-processing transformations degrade the subtle generator-specific artifacts that attribution models rely on. Prior methods achieve high accuracy on clean images but collapse under realistic degradation — a standard ResNet-50 baseline drops from **98.93% to 71.47%** accuracy when images are degraded.
+AI-generated images are rarely distributed in pristine form. Before reaching a viewer, they are typically JPEG-compressed, resized, re-uploaded through social platforms, or screenshotted. These post-processing transformations degrade the subtle generator-specific artifacts that attribution models rely on. Prior methods achieve high accuracy on clean images but collapse under realistic degradation; a standard ResNet-50 baseline drops from **98.93% to 71.47%** accuracy when images are degraded.
 
 ### The Approach
 
@@ -41,7 +41,7 @@ The research model is wrapped in a full production inference pipeline:
 
 DRIFT is a **closed-set** attribution system. It identifies among the 10 generators it was trained on; images from unseen generators or non-portrait content may yield unreliable predictions.
 
-This project is designed as a detection-side complement to provenance-based approaches like [C2PA Content Credentials](https://c2pa.org/) — useful precisely when a signed content manifest is absent.
+This project is designed as a detection-side complement to provenance-based approaches like [C2PA Content Credentials](https://c2pa.org/).
 
 
 ## Inference & Performance

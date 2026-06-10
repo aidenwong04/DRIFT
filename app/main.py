@@ -6,6 +6,7 @@ import io
 import numpy as np
 from PIL import Image
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import torch
 import torch.nn as nn
@@ -33,13 +34,17 @@ async def lifespan(app: FastAPI): #lifespan function to manage the lifecycle of 
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    BASE_DIR = Path(__file__).parent.parent
+    ONNX_PATH = BASE_DIR / "models" / "drift_dinov2.onnx"
+    PROBE_PATH = BASE_DIR / "models" / "linear_probe.pth"
+
     session = ort.InferenceSession(
-        "..\\models\\drift_dinov2.onnx",
+        str(ONNX_PATH),
         providers=["CPUExecutionProvider"]
     )
     input_name = session.get_inputs()[0].name
 
-    checkpoint = torch.load("..\\models\\linear_probe.pth", map_location=device)
+    checkpoint = torch.load(str(PROBE_PATH), map_location=device)
 
     probe_model = nn.Linear(768,10).to(device)
     probe_model.load_state_dict(checkpoint['classifier_state'])
@@ -53,6 +58,13 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 def root():
     return {"message": "DRIFT API is running"}
+
+@app.get("/healthz")
+def health_check():
+    return {"status:": "ok",
+            "model": "drift_dinov2.onnx",
+            "probe": "linear_probe.pth"
+            }
 
 class PredictionResponse(BaseModel):
     prediction: str # The predicted class label
