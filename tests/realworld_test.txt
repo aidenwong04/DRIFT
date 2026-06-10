@@ -1,0 +1,46 @@
+Real world hold out test set
+(Manually generated 5 images (portraits) from each generator for testing)
+
+1. Adobe Firefly (generated using the free Adobe Firefly 4)
+
+firefly_1.jpg
+results: 
+    {
+    "prediction": "Flux.1.1 Pro",
+    "confidence": 0.924001932144165,
+    "latency": 168.18
+    }
+
+firefly2.jpg
+results: 
+    {
+    "prediction": "Adobe Firefly",
+    "confidence": 0.8897107839584351,
+    "latency": 154.02
+    }
+
+firefly3.jpg
+results: 
+    {
+    "prediction": "Leonardo AI",
+    "confidence": 0.9974756836891174,
+    "latency": 169.73
+    }
+
+firefly4.jpg
+results:
+    {
+    "prediction": "Adobe Firefly",
+    "confidence": 0.7480241060256958,
+    "latency": 142.56
+    }
+
+firefly5.jpg
+results:
+    {
+    "prediction": "Adobe Firefly",
+    "confidence": 0.9989147186279297,
+    "latency": 164.93
+    }
+
+2. 
