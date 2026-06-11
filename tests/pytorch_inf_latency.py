@@ -11,8 +11,7 @@ sys.path.append(target_folder)
 
 from model import DRIFT
 
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ckpt_path = hf_hub_download(
     repo_id='aidenite/drift-dinov3-vitb16',

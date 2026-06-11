@@ -1,6 +1,8 @@
 ## About
 
-**DRIFT** (Diffusion-Robust Invariant Fingerprint Training) is a production-grade synthetic image attribution system that identifies which of 10 commercial AI image generators produced a given image, even after the image has been compressed, resized, screenshotted, or re-uploaded through social media platforms.
+**DRIFT** (Diffusion-Robust Invariant Fingerprint Training) is a synthetic image attribution system that identifies which of 10 commercial AI image generators produced a given image, even after the image has been compressed, resized, screenshotted, or re-uploaded through social media platforms.
+
+model was developed at Boston University with Additya Singh, Martin So, Daniel Chen, Aohan Mei
 
 ### The Problem
 
@@ -12,6 +14,11 @@ DRIFT addresses this robustness gap by combining two components:
 
 - **A six-type stochastic degradation pipeline** — applied during training to simulate JPEG compression, Gaussian blur, Gaussian noise, re-upload (downscale + upscale), screenshot simulation, and random combinations thereof.
 - **Supervised Contrastive Learning (SupCon)** — which trains the encoder to produce transformation-invariant fingerprint embeddings by treating all images from the same generator as positives. After contrastive training, a lightweight linear probe (768→10) is trained on top of frozen DINOv2 ViT-B/14 features for final 10-way attribution.
+
+### Live Demo
+API endpoint: https://drift-api-765464933028.asia-east1.run.app/docs 
+
+open the /docs URL in your browser and upload a real image through /predict
 
 ### Results
 
