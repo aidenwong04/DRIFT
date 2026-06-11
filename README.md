@@ -2,7 +2,7 @@
 
 **DRIFT** (Diffusion-Robust Invariant Fingerprint Training) is a synthetic image attribution system that identifies which of 10 commercial AI image generators produced a given image, even after the image has been compressed, resized, screenshotted, or re-uploaded through social media platforms.
 
-model was developed at Boston University with Additya Singh, Martin So, Daniel Chen, Aohan Mei
+The DRIFT model was developed at Boston University in collaboration with Additya Singh, Martin So, Daniel Chen, Aohan Mei
 
 ### The Problem
 
