@@ -6,9 +6,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ ./app/
-COPY models/ ./models/
 
-EXPOSE 8000
+RUN mkdir -p models && \
+    wget -q -O models/drift_dinov2.onnx "https://github.com/aidenwong04/DRIFT/releases/download/v1.0/drift_dinov2.onnx" && \
+    wget -q -O models/drift_dinov2.onnx.data "https://github.com/aidenwong04/DRIFT/releases/download/v1.0/drift_dinov2.onnx.data" && \
+    wget -q -O models/linear_probe.pth "https://github.com/aidenwong04/DRIFT/releases/download/v1.0/linear_probe.pth"
+
+    EXPOSE 8000
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
