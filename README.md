@@ -174,7 +174,12 @@ This project is designed as a detection-side complement to provenance-based appr
 
 ## Contributors
 
-Developed at Boston University in collaboration with Additya Singh, Martin So, Daniel Chen, and Aohan Mei.
+| Contributor | Role |
+|---|---|
+| Aiden Wong | MLOps & deployment — ONNX export, FastAPI serving, Docker, GCP Cloud Run, CI/CD |
+| Aiden Wong, Additya Singh, Martin So, Daniel Chen, Aohan Mei | Research & training — model architecture, SupCon training, WILD dataset evaluation |
+
+Research conducted at Boston University.
 
 ---
 
