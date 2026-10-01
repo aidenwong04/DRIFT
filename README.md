@@ -66,9 +66,9 @@ The DINOv3 backbone is exported to ONNX (opset 17) and served via ONNX Runtime w
 | Inference runtime | ONNX Runtime (CPU) |
 | API framework | FastAPI + Uvicorn |
 | Containerisation | Docker |
-| Container registry | Docker Hub |
+| Container registry | Google Artifact Registry (images tagged by commit) |
 | Cloud serving | GCP Cloud Run (serverless, asia-east1) |
-| CI/CD | GitHub Actions (build → push → deploy on every commit to `main`) |
+| CI/CD | GitHub Actions: build → push → deploy at zero traffic → smoke test → promote, on every code change to `main`; keyless auth via Workload Identity Federation |
 
 ---
 

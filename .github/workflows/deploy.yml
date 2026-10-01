@@ -1,39 +1,110 @@
+# Build the DRIFT API image and deploy it to Cloud Run on pushes to main.
+#
+# The image goes to Artifact Registry, tagged with the commit, and the service
+# runs that exact tag. The new revision starts with no traffic, is checked at
+# its own tagged URL, and only then takes 100% of traffic. A failed check
+# leaves the current revision serving.
+#
+# Auth is Workload Identity Federation: GitHub's OIDC token is exchanged for
+# short-lived credentials of github-actions@, and only for pushes to main of
+# this repository. There is no service account key anywhere.
+
 name: Build and Deploy
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "**.md"
+      - LICENSE
+      - "*.pdf"
+      - eval_results/**
+      - splits/**
+      - tests/**
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: calcium-complex-499113-a2
+  REGION: asia-east1
+  SERVICE: drift-api
+  IMAGE: asia-east1-docker.pkg.dev/calcium-complex-499113-a2/drift/drift-api
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
+      - uses: google-github-actions/auth@v3
+        id: auth
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          workload_identity_provider: projects/765464933028/locations/global/workloadIdentityPools/github/providers/github-oidc
+          service_account: github-actions@calcium-complex-499113-a2.iam.gserviceaccount.com
+          # docker does not reliably pick up gcloud's credential helper on
+          # the runner, so it logs in with a short-lived access token instead.
+          token_format: access_token
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: aidenmwong/drift:latest
+      - uses: google-github-actions/setup-gcloud@v3
 
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v2
+      - uses: docker/login-action@v4
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          registry: ${{ env.REGION }}-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
 
-      - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: drift-api
-          image: docker.io/aidenmwong/drift:latest
-          region: asia-east1
-          flags: --memory 2Gi --port 8000 --allow-unauthenticated
+      - name: Build and push the image
+        run: |
+          docker build -t "${IMAGE}:${GITHUB_SHA}" .
+          docker push "${IMAGE}:${GITHUB_SHA}"
+
+      # Public access is already set on the service and carries over; these
+      # flags pin the settings that matter for cost and for the container.
+      - name: Deploy a revision with no traffic
+        id: deploy
+        run: |
+          TAG="sha-${GITHUB_SHA::7}"
+          gcloud run deploy "$SERVICE" \
+            --project "$PROJECT_ID" --region "$REGION" \
+            --image "${IMAGE}:${GITHUB_SHA}" \
+            --port 8000 --memory 2Gi --max-instances 2 \
+            --no-traffic --tag "$TAG" --quiet
+          STATUS=$(gcloud run services describe "$SERVICE" \
+            --project "$PROJECT_ID" --region "$REGION" --format=json)
+          {
+            echo "tag=$TAG"
+            echo "url=$(jq -r --arg t "$TAG" '.status.traffic[] | select(.tag == $t) | .url' <<< "$STATUS")"
+            echo "revision=$(jq -r --arg t "$TAG" '.status.traffic[] | select(.tag == $t) | .revisionName' <<< "$STATUS")"
+          } >> "$GITHUB_OUTPUT"
+
+      # The model loads before the app accepts requests, so a 200 from / means
+      # it is ready. Not /healthz: Cloud Run's front end answers some paths
+      # ending in "z" with its own 404, so that route never reaches the app.
+      - name: Smoke test the new revision
+        env:
+          URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          set -euo pipefail
+          curl -sf --max-time 180 "$URL/" | grep -q "DRIFT API is running"
+          test "$(curl -s -o /dev/null -w '%{http_code}' --max-time 60 "$URL/docs")" = 200
+
+      - name: Send all traffic to the new revision
+        run: |
+          gcloud run services update-traffic "$SERVICE" \
+            --project "$PROJECT_ID" --region "$REGION" \
+            --to-revisions "${{ steps.deploy.outputs.revision }}=100" --quiet
+
+      - name: Remove the test tag
+        if: always() && steps.deploy.outputs.tag != ''
+        run: |
+          gcloud run services update-traffic "$SERVICE" \
+            --project "$PROJECT_ID" --region "$REGION" \
+            --remove-tags "${{ steps.deploy.outputs.tag }}" --quiet
