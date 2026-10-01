@@ -176,8 +176,8 @@ This project is designed as a detection-side complement to provenance-based appr
 
 | Contributor | Role |
 |---|---|
-| Aiden Wong | MLOps & deployment — ONNX export, FastAPI serving, Docker, GCP Cloud Run, CI/CD |
-| Aiden Wong, Additya Singh, Martin So, Daniel Chen, Aohan Mei | Research & training — model architecture, SupCon training, WILD dataset evaluation |
+| Aiden Wong | Degradation pipeline, SupCon training, MLOps & deployment (ONNX export, FastAPI, Docker, GCP Cloud Run, CI/CD) |
+| Additya Singh, Martin So, Daniel Chen, Aohan Mei | Evaluation on WILD, ablation studies |
 
 Research conducted at Boston University.
 
